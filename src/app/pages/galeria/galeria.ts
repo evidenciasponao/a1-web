@@ -59,7 +59,7 @@ export class Galeria {
             descripcion: 'Acabado premium.'
         },
         {
-            nombre: 'Manilla 1111',
+            nombre: 'Manilla 11/11',
             precio: '$60.000 COP',
             imagen: 'images/manilla9.jpg',
             descripcion: 'Diseño exclusivo.'
