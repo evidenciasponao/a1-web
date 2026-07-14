@@ -1,68 +1,99 @@
 <div class="container">
 
-  <h2>Nuestra Colección</h2>
+    <h1>Nuestra Colección</h1>
 
-  <div class="cards">
+    <div class="cards">
 
-    <div class="card" *ngFor="let manilla of manillas">
+        <article class="card" *ngFor="let manilla of manillas">
 
-      <img
-        [src]="manilla.imagen"
-        [alt]="manilla.nombre"
-        (click)="abrirManilla(manilla)"
-        class="imagen-click">
+            <button type="button" class="imagen-button" (click)="abrirManilla(manilla)"
+                [attr.aria-label]="'Ver detalles de ' + manilla.nombre">
 
-      <h3>{{ manilla.nombre }}</h3>
+                <img [src]="manilla.imagen" [alt]="manilla.nombre" loading="lazy">
 
-      <p>{{ manilla.precio }}</p>
+            </button>
 
-      <a
-        class="btn-whatsapp"
-        target="_blank"
-        href="https://wa.me/573114147623?text=Hola,%20me%20interesa%20la%20manilla%20{{ manilla.nombre }}%20que%20vi%20en%20su%20galería.">
-        Comprar por WhatsApp
-      </a>
+            <div class="card-info">
+
+                <h2>
+                    {{ manilla.nombre }}
+                </h2>
+
+                <p class="card-precio">
+                    {{ manilla.precio }}
+                </p>
+
+                <a class="btn-whatsapp" target="_blank" rel="noopener noreferrer" [href]="'https://wa.me/573114147623?text=Hola,%20me%20interesa%20la%20manilla%20'
+                        + manilla.nombre
+                        + '%20que%20vi%20en%20su%20galería.'">
+
+                    Comprar por WhatsApp
+
+                </a>
+
+            </div>
+
+        </article>
 
     </div>
 
-  </div>
-
 </div>
 
-<!-- MODAL -->
 
-<div
-  class="modal"
-  *ngIf="manillaSeleccionada"
-  (click)="cerrarManilla()">
+<!-- ==========================
+     MODAL PRODUCTO
+========================== -->
 
-  <div
-    class="modal-content"
-    (click)="$event.stopPropagation()">
+<div class="modal" *ngIf="manillaSeleccionada" (click)="cerrarManilla()" role="dialog" aria-modal="true">
 
-    <img
-      [src]="manillaSeleccionada.imagen"
-      [alt]="manillaSeleccionada.nombre">
+    <article class="modal-content" (click)="$event.stopPropagation()">
 
-    <h3>
-      {{ manillaSeleccionada.nombre }}
-    </h3>
+        <button type="button" class="modal-close" (click)="cerrarManilla()" aria-label="Cerrar detalles del producto">
 
-    <p class="precio">
-      {{ manillaSeleccionada.precio }}
-    </p>
+            ×
 
-    <p class="descripcion">
-      {{ manillaSeleccionada.descripcion }}
-    </p>
+        </button>
 
-    <a
-      class="btn-whatsapp"
-      target="_blank"
-      href="https://wa.me/573114147623?text=Hola,%20me%20interesa%20la%20{{ manillaSeleccionada.nombre }}">
-      Comprar por WhatsApp
-    </a>
 
-  </div>
+        <!-- IMAGEN -->
+
+        <div class="modal-image">
+
+            <img [src]="manillaSeleccionada.imagen" [alt]="manillaSeleccionada.nombre">
+
+        </div>
+
+
+        <!-- INFORMACIÓN -->
+
+        <div class="modal-info">
+
+            <span class="modal-label">
+                CREACIÓN APOLO
+            </span>
+
+            <h2>
+                {{ manillaSeleccionada.nombre }}
+            </h2>
+
+            <p class="precio">
+                {{ manillaSeleccionada.precio }}
+            </p>
+
+            <p class="descripcion">
+                {{ manillaSeleccionada.descripcion }}
+            </p>
+
+            <a class="btn-whatsapp" target="_blank" rel="noopener noreferrer" [href]="'https://wa.me/573114147623?text=Hola,%20me%20interesa%20la%20'
+                    + manillaSeleccionada.nombre
+                    + '%20que%20vi%20en%20su%20galería.'">
+
+                Comprar por WhatsApp
+
+            </a>
+
+        </div>
+
+    </article>
 
 </div>
